@@ -13,7 +13,8 @@ class InstructionMemory
         void writeInst(uint32_t addr, uint32_t inst);
         uint32_t readInst(uint32_t addr) const;
     private:
-        std::uint8_t instMem[INST_MEM_SIZE];    // Memory holds 4096 cells, each storing 1 byte (8 bits)
+        /* Byte-addressable instruction memory, addressable in little-endian fashion */
+        uint8_t instMem[INST_MEM_SIZE];    // Memory holds 4096 cells, each storing 1 byte (8 bits)
 };
 
 class DataMemory
