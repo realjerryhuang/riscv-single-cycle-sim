@@ -3,8 +3,8 @@
 
 #include <cstdint>
 
-constexpr unsigned int INST_MEM_SIZE = 4096;
-constexpr unsigned int DATA_MEM_SIZE = 4096;
+constexpr unsigned int INST_MEM_SIZE = 4096;    // 4 KB
+constexpr unsigned int DATA_MEM_SIZE = 131072;  // 128 KB, originally 4 KB too but our traces' data addresses surpass that
 
 class InstructionMemory
 {
