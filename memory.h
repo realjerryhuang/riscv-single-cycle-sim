@@ -2,6 +2,7 @@
 #define MEMORY_INCLUDED
 
 #include <cstdint>
+#include <cassert>
 
 constexpr unsigned int INST_MEM_SIZE = 4096;    // 4 KB
 constexpr unsigned int DATA_MEM_SIZE = 131072;  // 128 KB, originally 4 KB too but our traces' data addresses surpass that
