@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <iostream>
+#include <cassert>
 
 enum ALUOperation : uint32_t {
     ALU_AND = 0,

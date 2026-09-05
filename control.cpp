@@ -15,7 +15,9 @@ void control
 	uint32_t& regWrite
 )
 {
-	// Assume that opcode is 7 bits long (To-Do: Check this.)
+	/* Check that opcode is 7 bits long. */
+	assert (opcode < (1u << 7) && "opcode must be 7 bits");
+
 	/* R-type: SRA, SUB, AND */
 	if (opcode == 0b0110011) {
 		branch = 0b0;
@@ -109,7 +111,9 @@ void aluControl
 	uint32_t funct3 = inst14to12;
 	uint32_t funct7Bit = inst30;
 
-	// To-Do: Check that funct3 is 3 bits and funct7Bit is 1 bit.
+	/* Check that funct3 is 3 bits long and funct7Bit is 1 bit long. */
+	assert(funct3 < (1u << 3) && "funct3 must be 3 bits");
+	assert(funct7Bit < (1u << 1) && "funct7Bit must be 1 bit");
 
 	switch (aluOp) {
 		case 0b00:		// Add: LBU, LW, JALR, SH, SW, LUI
