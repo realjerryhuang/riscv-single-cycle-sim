@@ -2,6 +2,7 @@
 #define REGFILE_INCLUDED
 
 #include <cstdint>
+#include <cassert>
 
 class RegFile
 {

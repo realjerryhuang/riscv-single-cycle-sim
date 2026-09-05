@@ -1,5 +1,4 @@
 #include "RegFile.h"
-#include <cassert>
 
 RegFile::RegFile() : x{}        // Initialize all register values to 0
 {
@@ -7,7 +6,7 @@ RegFile::RegFile() : x{}        // Initialize all register values to 0
 
 void RegFile::writeReg(unsigned int regNum, uint32_t data)
 {
-    assert(regNum < 32);        // Check that regNum is within range [0, 31]
+    assert(regNum < 32 && "Register number must be between 0 and 31, inclusive");        // Check that regNum is within range [0, 31]
     if (regNum == 0)            // x0 is hardcoded to 0
         return;
     else
@@ -16,6 +15,6 @@ void RegFile::writeReg(unsigned int regNum, uint32_t data)
 
 uint32_t RegFile::readReg(unsigned int regNum) const
 {
-    assert(regNum < 32);        // Check that regNum is within range [0, 31]
+    assert(regNum < 32 && "Register number must be between 0 and 31, inclusive");        // Check that regNum is within range [0, 31]
     return x[regNum];
 }
