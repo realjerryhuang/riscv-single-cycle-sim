@@ -17,8 +17,13 @@ uint32_t CPU::readReg(unsigned int regNum) const
 
 void CPU::loadProgram(const std::vector<uint8_t>& program)
 {
-	for (size_t i = 0; i < program.size(); i++) {
-		cpuInstMem.writeInst(static_cast<uint32_t>(i), program[i]);
+	for (size_t i = 0; i+3 < program.size(); i+=4) {
+		uint32_t word = (static_cast<uint32_t>(program[i])) |
+			(static_cast<uint32_t>(program[i+1]) << 8) |
+			(static_cast<uint32_t>(program[i+2]) << 16) |
+			(static_cast<uint32_t>(program[i+3]) << 24);
+
+		cpuInstMem.writeInst(static_cast<uint32_t>(i), word);
 	}
 }
 
@@ -26,7 +31,12 @@ void CPU::cycle()
 {
 	CycleState myCycleState{};	// Zero-initialized--erm...maybe not hardware accurate...
 
+	// std::cout << "PC=0x" << std::hex << pc << std::dec;
+
 	fetch(myCycleState);
+
+	// std::cout << " inst=0x" << std::hex << myCycleState.inst << std::dec << std::endl;
+
 	decode(myCycleState);
 	execute(myCycleState);
 	memAccess(myCycleState);

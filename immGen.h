@@ -29,7 +29,7 @@ inline int32_t immGen(uint32_t inst)
 		int32_t imm10to5 = inst & 0x7E000000;
 		int32_t imm4to1 = inst & 0x00000F00;
 		int32_t imm11 = inst & 0x00000080;
-		immediate = (imm12 >> 19) | (imm10to5 >> 20) | (imm4to1 >> 7) | (imm11 << 4);
+		immediate = (imm12 >> 20) | (imm10to5 >> 21) | (imm4to1 >> 8) | (imm11 << 3);	// Note: this isn't ready to use as-is; it needs to be left-shifted by 1
 	}
 	/* U-type: LUI */
 	else if (opcode == 0b0110111) {
