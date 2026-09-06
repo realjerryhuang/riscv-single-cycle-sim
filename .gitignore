@@ -1,0 +1,15 @@
+# Compiled executable
+cpusim
+cpusim.exe
+
+# Object files (in case this is compiled with -c/ separate compilation)
+*.o
+*.obj
+
+# macOS junk files
+.DS_Store
+__MACOSX/
+
+# Editor/IDE clutter
+.vscode/
+*.swp
