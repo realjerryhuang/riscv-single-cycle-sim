@@ -23,7 +23,7 @@ void InstructionMemory::writeInst(uint32_t addr, uint32_t inst)
     instMem[addr+3] = byte3;
 }
 
-/* Given an address, return the instruction stored in the instruction memory at that address in big-endian format. */
+/* Given an address, reconstruct and return the instruction stored in the instruction memory at that address. */
 uint32_t InstructionMemory::readInst(uint32_t addr) const
 {
     assert(addr % 4 == 0 && "Instruction address must be word-aligned");
