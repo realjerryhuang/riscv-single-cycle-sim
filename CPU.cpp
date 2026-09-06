@@ -126,7 +126,7 @@ void CPU::writeBack(CycleState& myCycleState)
 	pc = myCycleState.branchMUX2Result;
 
 	// Write to register file
-	uint32_t rfMUXResult = mux4to1(myCycleState.cpuALUOutput.result, myCycleState.dataMemOut, myCycleState.pcPlus4, 0, myCycleState.resultSrc);
+	uint32_t rfMUXResult = mux4to1(myCycleState.cpuALUOutput.result, myCycleState.dataMemOut, myCycleState.pcPlus4, 0u, myCycleState.resultSrc);
 	if (myCycleState.regWrite)
 		cpuRegFile.writeReg(myCycleState.writeReg, rfMUXResult);
 	return;

@@ -12,7 +12,7 @@ inline T mux2to1(T in1, T in2, bool select)
 template <typename T>
 inline T mux4to1(T in1, T in2, T in3, T in4, uint32_t select)
 {
-    switch (select)
+    switch (select) {
         case 0b00:
             return in1;
             break;
@@ -25,6 +25,7 @@ inline T mux4to1(T in1, T in2, T in3, T in4, uint32_t select)
         default: // select == 0b11
             return in4;
             break;
+    }
 }
 
 #endif  // MUX_INCLUDED
