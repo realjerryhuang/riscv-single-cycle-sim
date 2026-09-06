@@ -25,12 +25,14 @@ class CPU
         uint32_t readReg(unsigned int regNum) const; 
         void loadProgram(const std::vector<uint8_t>& program);
         void cycle();
+        uint32_t readLastFetchedInst() const;
 
     private:
         uint32_t pc;
         RegFile cpuRegFile;
         InstructionMemory cpuInstMem;
         DataMemory cpuDataMem;
+        uint32_t lastFetchedInst;   // Instruction fetched by most recently completed cycle(), used for printing to terminal
 
         struct CycleState
         {

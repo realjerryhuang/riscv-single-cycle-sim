@@ -3,6 +3,7 @@
 CPU::CPU()
 {
 	pc = 0;
+	lastFetchedInst = 0;
 }
 
 uint32_t CPU::readPC() const
@@ -31,16 +32,17 @@ void CPU::cycle()
 {
 	CycleState myCycleState{};	// Zero-initialized--erm...maybe not hardware accurate...
 
-	// std::cout << "PC=0x" << std::hex << pc << std::dec;
-
 	fetch(myCycleState);
-
-	// std::cout << " inst=0x" << std::hex << myCycleState.inst << std::dec << std::endl;
-
+	lastFetchedInst = myCycleState.inst;
 	decode(myCycleState);
 	execute(myCycleState);
 	memAccess(myCycleState);
 	writeBack(myCycleState);
+}
+
+uint32_t CPU::readLastFetchedInst() const
+{
+	return lastFetchedInst;
 }
 
 void CPU::fetch(CycleState& myCycleState)
@@ -59,6 +61,8 @@ void CPU::decode(CycleState& myCycleState)
     uint32_t inst = myCycleState.inst;
 
 	// Split instruction into fields
+	/*	0x  0     0     0     0     0     0   0   0
+		  31-28 27-24 23-20 19-16 15-12 11-8 7-4 3-0	*/
 	uint32_t opcode = inst & 0x0000007F;					// 6:0
 	uint32_t readReg1 = (inst & 0x000F8000) >> 15;			// 19:15 (AKA rs1)
 	uint32_t readReg2 = (inst & 0x01F00000) >> 20;			// 24:20 (AKA rs2)
@@ -141,9 +145,3 @@ void CPU::writeBack(CycleState& myCycleState)
 		cpuRegFile.writeReg(myCycleState.writeReg, rfMUXResult);
 	return;
 }
-
-/*
-0x  0     1     F     0     0     0   0   0
-  31-28 27-24 23-20 19-16 15-12 11-8 7-4 3-0
-
-*/
